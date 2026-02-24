@@ -1,0 +1,33 @@
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.ci"
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+testpaths = ["apps"]
+markers = [
+    "unit: Pure logic tests without DB",
+    "integration: Tests that require database",
+]
+addopts = [
+    "--strict-markers",
+    "-v",
+]
+
+[tool.coverage.run]
+source = ["apps", "config"]
+omit = [
+    "*/tests/*",
+    "*/migrations/*",
+    "*/admin.py",
+    "manage.py",
+    "config/settings/*",
+    "config/asgi.py",
+    "config/wsgi.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 70
+
+[tool.coverage.xml]
+output = "coverage.xml"
