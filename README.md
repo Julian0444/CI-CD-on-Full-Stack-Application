@@ -1,4 +1,4 @@
-# Todo App — Full Stack con CI/CD
+# To-Do App — Full Stack con CI/CD
 
 Aplicación full-stack de gestión de tareas con pipeline CI/CD completo.
 
