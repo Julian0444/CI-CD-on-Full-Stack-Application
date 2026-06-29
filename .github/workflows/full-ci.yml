@@ -68,6 +68,13 @@ jobs:
         env:
           DJANGO_SETTINGS_MODULE: config.settings.ci
 
+      # coverage.py escribe las fuentes como "apps"/"config"; SonarCloud
+      # analiza desde la raíz del repo, así que les anteponemos "backend/"
+      # para que resuelva backend/apps/... y backend/config/...
+      - name: Fix coverage source paths for SonarCloud
+        run: |
+          sed -i 's#<source>apps</source>#<source>backend/apps</source>#; s#<source>config</source>#<source>backend/config</source>#' coverage.xml
+
       - name: Upload coverage artifact
         uses: actions/upload-artifact@v4
         with:
