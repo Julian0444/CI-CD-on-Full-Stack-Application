@@ -20,6 +20,7 @@ omit = [
     "*/tests/*",
     "*/migrations/*",
     "*/admin.py",
+    "*/__init__.py",
     "manage.py",
     "config/settings/*",
     "config/asgi.py",
