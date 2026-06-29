@@ -1,0 +1,12 @@
+node_modules
+build
+coverage
+cypress/videos
+cypress/screenshots
+.git
+.gitignore
+Dockerfile
+.dockerignore
+npm-debug.log*
+.env
+.env.local
