@@ -160,4 +160,6 @@ DJANGO_SETTINGS_MODULE=config.settings.ci python -m pytest --cov --cov-report=xm
 
 ## 9. Legacy
 
-El código Go original se preserva en `/backend_legacy_go/` como referencia. No se ejecuta ni se incluye en el pipeline.
+El backend original en Go (Gin + MongoDB) fue reemplazado por completo por esta
+implementación en Django. El código legacy se removió del repositorio; este
+documento conserva el mapeo de endpoints y las decisiones de la migración.
