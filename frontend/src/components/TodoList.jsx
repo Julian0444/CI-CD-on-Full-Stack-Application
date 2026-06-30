@@ -3,7 +3,15 @@ import TodoItem from "./TodoItem";
 
 export default function TodoList({ todos, onToggle, onDelete, onUpdate }) {
   if (todos.length === 0) {
-    return <p role="status">No hay tareas cargadas.</p>;
+    return (
+      <div className="empty">
+        <span className="empty__icon" aria-hidden="true">📝</span>
+        <p role="status" className="empty__text">
+          No hay tareas cargadas.
+        </p>
+        <span className="empty__hint">Agregá tu primera tarea para empezar.</span>
+      </div>
+    );
   }
 
   return (

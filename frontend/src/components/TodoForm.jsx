@@ -22,21 +22,21 @@ export default function TodoForm({ onAdd, disabled = false }) {
 
   return (
     <form onSubmit={handleSubmit} className="todo-form">
-      <label className="form-field todo-field">
-        <span>Nueva tarea</span>
+      <div className="todo-form__row">
         <input
           type="text"
-          placeholder="Ej: Comprar víveres"
+          className="todo-form__input"
+          placeholder="¿Qué necesitás hacer?"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
           aria-label="Título de la tarea"
           disabled={disabled}
           data-cy="todo-input"
         />
-      </label>
-      <button type="submit" className="btn btn--primary" disabled={disabled} data-cy="add-btn">
-        Agregar tarea
-      </button>
+        <button type="submit" className="btn btn--primary" disabled={disabled} data-cy="add-btn">
+          Agregar tarea
+        </button>
+      </div>
       {error && (
         <span role="alert" className="form-error">
           {error}

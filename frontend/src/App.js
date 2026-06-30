@@ -137,21 +137,23 @@ function App() {
     }
   };
 
+  const pendingCount = todos.filter((todo) => !todo.completed).length;
+
   return (
     <div className="app">
-      <header className="app__header">
+      <header className="brand">
+        <span className="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </span>
         <h1>To-Do List</h1>
-        <p>Gestioná tus tareas pendientes y mantené todo bajo control.</p>
+        <p className="brand__tagline">
+          Una app full-stack desplegada con un pipeline CI/CD completo.
+        </p>
       </header>
 
-      <main className="app__content">
-        <RegisterForm
-          onRegister={handleRegister}
-          onLogin={handleLogin}
-          disabled={Boolean(currentUser)}
-          defaultEmail={currentUser}
-        />
-
+      <main className={currentUser ? "shell shell--wide" : "shell"}>
         {currentUser ? (
           <section aria-labelledby="todos-section-title" className="panel todo-panel">
             <div className="todo-panel__header">
@@ -164,15 +166,22 @@ function App() {
                 </p>
               </div>
 
-              <button type="button" className="btn btn--outline" onClick={handleLogout}>
-                Cerrar sesión
-              </button>
+              <div className="todo-panel__meta">
+                <span className="badge">
+                  {pendingCount} pendiente{pendingCount === 1 ? "" : "s"}
+                </span>
+                <button type="button" className="btn btn--outline" onClick={handleLogout}>
+                  Cerrar sesión
+                </button>
+              </div>
             </div>
 
             <TodoForm onAdd={handleCreateTodo} disabled={isLoadingTodos} />
 
             {isLoadingTodos ? (
-              <p role="status">Cargando tareas...</p>
+              <p role="status" className="hint">
+                Cargando tareas...
+              </p>
             ) : (
               <TodoList
                 todos={todos}
@@ -183,13 +192,20 @@ function App() {
             )}
           </section>
         ) : (
-          <section className="panel panel--placeholder">
-            <p className="panel__subtitle">
-              Registrate o iniciá sesión para comenzar a agregar tareas y hacer seguimiento de tus pendientes.
-            </p>
-          </section>
+          <RegisterForm
+            onRegister={handleRegister}
+            onLogin={handleLogin}
+            disabled={Boolean(currentUser)}
+            defaultEmail={currentUser}
+          />
         )}
       </main>
+
+      <footer className="footer">
+        <span>React · Django REST · PostgreSQL</span>
+        <span className="footer__dot">•</span>
+        <span>GitHub Actions · SonarCloud · Docker · Render</span>
+      </footer>
 
       <Toast message={toast.message} type={toast.type} onClose={clearToast} />
     </div>
